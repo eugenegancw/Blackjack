@@ -2,6 +2,7 @@ from .deck import Deck
 from .dealer import Dealer
 from .player import Player
 
+
 class Game:
     def __init__(self):
         self.deck = Deck()
@@ -10,7 +11,7 @@ class Game:
         self.round_number = 1
         name_ = input("What is your name? ").title()
         self.player = Player(name_)
-    
+
     def start_game(self):
         print("Welcome to Blackjack!")
         while self.player.points > 0:
@@ -29,7 +30,7 @@ class Game:
                 print(f"Game ended. Your final points: {self.player.points}")
                 return False
             elif continue_game == 'yes':
-                self.round_ended = False # reset the whole round
+                self.round_ended = False  # reset the whole round
                 self.round_number += 1
                 return True
             else:
@@ -40,21 +41,20 @@ class Game:
         self.deck.shuffle()
         self.initial_cards_setup()
         self.check_blackjack()  # Check for blackjack after initial cards setup
-        
+
         if not self.round_ended:
             self.player_move()
             player_score = self.player.calculate_score()
-            #handle black jack case
             if player_score > 21:
                 self.all_display_hands(True)
                 print("You bursts! Dealer wins.")
                 self.player.points -= 10
                 self.round_ended = 1
+
         if not self.round_ended:
             self.dealer_move()
             self.output_round_winner()
             self.round_ended = 1
-
 
     def initial_cards_setup(self):
         # Clear the hands for a new round
@@ -62,8 +62,8 @@ class Game:
         for _ in range(2):
             self.player.add_card_to_hand(self.deck.deal_card())
             self.dealer.add_card_to_hand(self.deck.deal_card())
-    
-    def player_move(self): #this player move will be based on the user
+
+    def player_move(self):
         while self.player.calculate_score() <= 21:
             self.all_display_hands()
             option_ = input("Do you want to Hit or Stay? (hit/stay): ").strip().lower()
@@ -73,33 +73,31 @@ class Game:
                 break
             else:
                 print("Invalid choice. Please try again!")
-    
+
     def dealer_move(self):
         while self.dealer.calculate_score() <= 16:
             self.dealer.add_card_to_hand(self.deck.deal_card())
 
     def check_blackjack(self):
-        if self.dealer.calculate_score() == 21: #doesn't matter if player get blackjack
+        if self.dealer.calculate_score() == 21:  # Dealer's advantage
             self.all_display_hands(True)
             print("Dealer got Blackjack! You lose.")
             self.player.points -= 10
             self.round_ended = 1
-        
+
         elif self.player.calculate_score() == 21:
             self.all_display_hands(True)
             print(f"{self.player.name} got Blackjack! Congratulations!")
             self.player.points += 15
             self.round_ended = 1
-        
 
     def output_round_winner(self):
         player_score = self.player.calculate_score()
         dealer_score = self.dealer.calculate_score()
         self.all_display_hands(True)
-        # print(f"{self.player.name}'s points: {player_score} vs Dealer's ppoints: {dealer_score}")
         if dealer_score > 21 or dealer_score < player_score:
             print("You win!")
-            self.player.points +=10
+            self.player.points += 10
         elif dealer_score <= 21 and dealer_score > player_score:
             print("Dealer wins!")
             self.player.points -= 10

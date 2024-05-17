@@ -64,16 +64,22 @@ The Participant class serves as a superclass for Player and Dealer. This design 
    1. If a player’s score exceeds 21, it is considered a loss for the player, regardless of the dealer's hand. 
    1. If the Dealer gets a Blackjack, it is also considered a loss for the player, regardless of the player’s hand.
    1. Both assumptions simplify the game logic and outcome determination, ensuring clarity in scoring.
+1. **Standard Loss Penalty**: 
+   1. Any loss incurred by the player, regardless of whether the dealer gets a blackjack or the player exceeds 21, results in a deduction of 10 points. This simplifies the scoring mechanism, ensuring consistency in point adjustments for all loss scenarios.
 1. **Automatic Player Stop**:
    1. The game automatically stops for a player if his score exceeds 21 during a round. Drawing cards beyond 21 is unnecessary and is a loss regardless of the dealer's hand.
 1. **Input Handling:**
    1. The player’s name is the input at the start of the game for a personalised experience.
    1. Input for making decisions, i.e. whether to hit/stay or continue the game, is handled in a loop until valid input is provided
+1. **Minimum Hand Requirement:**
+   1. It is assumed that users are aware that they must achieve at least a minimum hand value of 12 to participate in the game.
 
 
 <ins>**Future Work**</ins>
 
 1. **Support for Multiple Players**:
    1. Extend the game to support more than one player competing against the dealer in the same round.
+1. **More features in Blackjack**:
+   1. This Blackjack implementation currently does not support certain winning scenarios like obtaining five cards without exceeding 21 or holding a hand with two aces. Integrating these features would enrich the gameplay by offering additional winning opportunities and strategic depth.
 1. **Additional Betting Options:**
    1. Introduce features such as doubling down or even allowing the modification of the number of points gained/lost in each round.

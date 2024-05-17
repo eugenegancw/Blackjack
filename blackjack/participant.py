@@ -5,15 +5,14 @@ class Participant:
 
     def add_card_to_hand(self, card):
         self.hand.append(card)
-    
+
     def calculate_score(self):
         total_score = sum(self.card_value(card) for card in self.hand)
         num_aces = len([card for card in self.hand if card.rank == "A"])
-        while total_score > 21 and num_aces >0:
+        while total_score > 21 and num_aces > 0:
             total_score -= 10
             num_aces -= 1
         return total_score
-
 
     def card_value(self, card):
         if card.rank.isdigit():
@@ -23,7 +22,7 @@ class Participant:
         elif card.rank == 'A':
             return 11
         return 0
-    
+
     def display_hand(self):
         print("-" * 20)
         print(f"{self.name}'s hand")
