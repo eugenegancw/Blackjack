@@ -39,7 +39,7 @@ The Participant class serves as a superclass for Player and Dealer. This design 
 
 **Steps to Execute**
 
-1. Ensure you have Python installed on your machine and install requirements using: *pip install requirements.txt*
+1. Ensure you have Python installed on your machine and install requirements using: *pip install -r requirements.txt*
 1. Navigate to the main directory.
 1. To play the game, run the following command: *python main.py* 
 
